@@ -31,7 +31,7 @@ userRoutes.route('/users/:id').get(function (request, response) {
     const db_connect = dbo.getDb();
     db_connect.collection('users')
         .findOne({ _id: ObjectId(request.params.id) }, function (err, result) {
-            if (err) throw errr;
+            if (err) throw err;
             response.json(result);
         })
 })
@@ -45,13 +45,13 @@ userRoutes.route('/users/add').post(function(request,respone){
         respone.json(result);
     })
 })
-userRoutes.route('/users/:id').post(function (request, response) {
+userRoutes.route('/cities/:id').post(function (request, response) {
     const db_connect = dbo.getDb();
     const _id = request.params.id
     const payload = request.body
     console.log(payload)
     console.log(_id)
-    db_connect.collection('users').updateOne({ _id: ObjectId(_id) }, {
+    db_connect.collection('cities').updateOne({ _id: ObjectId(_id) }, {
         $set: payload
     }).then((obj) => {
         response.json(obj)

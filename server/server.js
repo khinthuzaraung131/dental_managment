@@ -9,6 +9,7 @@ app.use(require("./routes/user"));
 app.use(require("./routes/doctor"));
 app.use(require("./routes/branch"));
 app.use(require("./routes/city"));
+
 // get driver connection
 const dbo = require("./db/conn");
 app.listen(port, () => {
