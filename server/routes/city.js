@@ -25,12 +25,13 @@ cityRoutes.route('/cities/:id').get(function (request, response) {
 })
 cityRoutes.route('/cities').post(function(request,respone){
   let db_connect=dbo.getDb();
-  console.log(request.body)
+  // console.log(request.body)
   const query=(({name})=>({name}))(request.body)
-  db_connect.collection("cities").insertOne({query,function(err,result){
+  db_connect.collection("cities").insertOne(query,function(err,result){
     if(err) throw err;
+    console.log(result)
     respone.json(result);
-  }})
+  })
 })
 cityRoutes.route('/cities/:id').post(function(request,respone){
   const db_connect=db.getDb();
@@ -45,11 +46,10 @@ cityRoutes.route('/cities/:id').post(function(request,respone){
 })
 cityRoutes.route('/cities/:id').delete(function(request,respone){
   const db_connect=dbo.getDb()
-  const _id=request.params.id
-  db_connect.collection("cities").deleteOne({_id:ObjectId(_id)}),function(err,result){
+  db_connect.collection("cities").deleteOne({_id:ObjectId(request.params.id)},function(err,result){
     if(err) throw err;
     respone.json(result)
-  }
+  })
 
   })
 
